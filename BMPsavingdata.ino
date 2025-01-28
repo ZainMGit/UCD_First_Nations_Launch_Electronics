@@ -43,7 +43,8 @@ void loop() {
   // Read BMP280 sensor data
   float temperature = bmp.readTemperature();
   float pressure = bmp.readPressure();
-  float altitude = bmp.readAltitude(1013.25); // Adjust to local forecast!
+  float altitude = bmp.readAltitude(1021); // 1013.25 is defaul value, 
+//currently using pressure reading from Davis
 
   // Print data to Serial Monitor
   Serial.print(F("Temperature = "));
