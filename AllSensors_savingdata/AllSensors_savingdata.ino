@@ -20,10 +20,13 @@ ISM330DHCXSensor AccGyr(&dev_interface);
 // SD Card File Objects
 File dataFile;
 File dataFile2;
-
+File dataFile3;
+unsigned long startTime;
 void setup() {
   Serial.begin(9600);
   while (!Serial) delay(100); // Wait for Serial Monitor to connect (for native USB)
+
+  startTime = millis();
 
   Serial.println(F("Initializing BMP280, ISM330DHCX, and SD card..."));
 
@@ -56,9 +59,10 @@ void setup() {
 
 void loop() {
   // Read BMP280 sensor data
+  unsigned long currentTime = millis() - startTime;
   float temperature = bmp.readTemperature();
   float pressure = bmp.readPressure();
-  float altitude = bmp.readAltitude(1021); // Adjusted for Davis
+  float altitude = bmp.readAltitude(1029); // Adjusted for Davis
 
   // Print BMP280 data to Serial Monitor
   Serial.print(F("Temperature = "));
@@ -73,10 +77,21 @@ void loop() {
   Serial.print(altitude);
   Serial.println(" m");
 
-  Serial.println();
+  //Serial.println();
+  dataFile3 = SD.open("graphBMP.txt", FILE_WRITE);
+  if (dataFile3) {
+    dataFile3.print(currentTime / 1000.0); // Convert milliseconds to seconds
+    dataFile3.print(" ");
+    dataFile3.print(pressure);
+    dataFile3.println();
+    dataFile3.flush();
+    dataFile3.close();
+  } else {
+    Serial.println(F("Error opening AltitudeValue.txt for writing."));
+  }
 
   // Open BMP280 data file
-  dataFile = SD.open("data.txt", FILE_WRITE);
+  dataFile = SD.open("BMP280.txt", FILE_WRITE);
   if (dataFile) {
     dataFile.print(F("Temperature = "));
     dataFile.print(temperature);
@@ -93,8 +108,10 @@ void loop() {
     dataFile.println();
     dataFile.close();
     Serial.println(F("BMP280 data written to SD card."));
+    Serial.println();
   } else {
-    Serial.println(F("Error opening data.txt for writing."));
+    Serial.println(F("Error opening BMP280.txt for writing."));
+    Serial.println();
   }
 
   // Read ISM330DHCX sensor data
@@ -118,7 +135,7 @@ void loop() {
   Serial.println(gyroscope[2]);
 
   // Open ISM330DHCX data file
-  dataFile2 = SD.open("data2.txt", FILE_WRITE);
+  dataFile2 = SD.open("position.txt", FILE_WRITE);
   if (dataFile2) {
     dataFile2.print("Acc[mg]: ");
     dataFile2.print(accelerometer[0]);
@@ -136,9 +153,11 @@ void loop() {
     dataFile2.println();
     dataFile2.close();
     Serial.println(F("ISM330DHCX data written to SD card."));
+    Serial.println();
   } else {
-    Serial.println(F("Error opening data2.txt for writing."));
+    Serial.println(F("Error opening position.txt for writing."));
+    Serial.println();
   }
 
-  delay(2000); // Delay before the next reading
+  delay(1800); // Delay before the next reading
 }
