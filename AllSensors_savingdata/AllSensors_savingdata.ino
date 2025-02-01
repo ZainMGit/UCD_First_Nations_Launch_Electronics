@@ -21,12 +21,14 @@ ISM330DHCXSensor AccGyr(&dev_interface);
 File dataFile;
 File dataFile2;
 File dataFile3;
-unsigned long startTime;
+float manualTime = 0.00;
+
+
 void setup() {
   Serial.begin(9600);
   while (!Serial) delay(100); // Wait for Serial Monitor to connect (for native USB)
 
-  startTime = millis();
+ 
 
   Serial.println(F("Initializing BMP280, ISM330DHCX, and SD card..."));
 
@@ -59,7 +61,7 @@ void setup() {
 
 void loop() {
   // Read BMP280 sensor data
-  unsigned long currentTime = millis() - startTime;
+  //unsigned long currentTime = millis() - startTime;
   float temperature = bmp.readTemperature();
   float pressure = bmp.readPressure();
   float altitude = bmp.readAltitude(1029); // Adjusted for Davis
@@ -80,7 +82,7 @@ void loop() {
   //Serial.println();
   dataFile3 = SD.open("graphBMP.txt", FILE_WRITE);
   if (dataFile3) {
-    dataFile3.print(currentTime / 1000.0); // Convert milliseconds to seconds
+    dataFile3.print(manualTime); // Convert milliseconds to seconds
     dataFile3.print(" ");
     dataFile3.print(pressure);
     dataFile3.println();
@@ -158,6 +160,7 @@ void loop() {
     Serial.println(F("Error opening position.txt for writing."));
     Serial.println();
   }
+  manualTime = manualTime + 2;
 
   delay(1800); // Delay before the next reading
 }
