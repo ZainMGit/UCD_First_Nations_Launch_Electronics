@@ -1,5 +1,3 @@
-UCD_First_Nations_Launch_Electronics
-
 Components needed for payload system
 - Arduino Uno R4
 - Micro SD card reader & microSD card
@@ -18,8 +16,7 @@ On an Arduino Uno the I2C pins are: A4(SDA) and A5(SCL)
 
 
 
-The BMP 280 sensor is recording temperature (°C) and pressure (Pa). Based on the pressure values from the sensor altitude (m) is being calculated. These values are being saved to the SD card in a .txt file every two seconds
-The ISM330DHCX sensor is recording acceleration (mg) and gyroscope angular velocity (mdps). These values are being saved to the SD card in a .txt file every two seconds.
+The BMP 280 sensor is recording temperature (°C) and pressure (Pa). Based on the pressure values from the sensor altitude (m) is being calculated. The ISM330DHCX sensor is recording acceleration (mg) and gyroscope angular velocity (mdps). Data from both sensors are saved to the SD card in separate .txt files every two seconds.
 
 
 
