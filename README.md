@@ -8,7 +8,7 @@ Components needed for payload system
 The I2C addresses of the sensors do not conflict so both sensors can be connected to the same I2C bus without issues.
 
 
-If using the Qwiic connectors the blue wire is for SDA and yellow for SCL
+If using the Qwiic connectors, the blue wire is for SDA and yellow for SCL
 On an Arduino Uno the I2C pins are: A4(SDA) and A5(SCL)
 Reccomended to use screw terminal blocks to secure wires during launch.
 

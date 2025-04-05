@@ -3,6 +3,12 @@
 #include <Adafruit_BMP280.h>
 #include <SD.h>
 #include <ISM330DHCXSensor.h>
+//#include <Adafruit_MMC5983MA.h>
+#include <SparkFun_MMC5983MA_Arduino_Library.h>
+SFE_MMC5983MA mag;
+
+
+
 
 #define BMP_SCK  (13)
 #define BMP_MISO (12)
@@ -25,8 +31,12 @@ float manualTime = 0.00;
 
 
 void setup() {
+
+
+
   Serial.begin(9600);
   while (!Serial) delay(100); // Wait for Serial Monitor to connect (for native USB)
+
 
  
 
@@ -64,7 +74,7 @@ void loop() {
   //unsigned long currentTime = millis() - startTime;
   float temperature = bmp.readTemperature();
   float pressure = bmp.readPressure();
-  float altitude = bmp.readAltitude(1029); // Adjusted for Davis
+  float altitude = bmp.readAltitude(1053); // Adjusted for Davis
 
   // Print BMP280 data to Serial Monitor
   Serial.print(F("Temperature = "));
@@ -136,7 +146,15 @@ void loop() {
   Serial.print(", ");
   Serial.println(gyroscope[2]);
 
-  // Open ISM330DHCX data file
+    // Read magnetometer data
+  
+
+  float magX = mag.getMeasurementX();
+  float magY = mag.getMeasurementY();
+  float magZ = mag.getMeasurementZ();
+
+
+
   dataFile2 = SD.open("position.txt", FILE_WRITE);
   if (dataFile2) {
     dataFile2.print("Acc[mg]: ");
@@ -145,21 +163,30 @@ void loop() {
     dataFile2.print(accelerometer[1]);
     dataFile2.print(", ");
     dataFile2.print(accelerometer[2]);
+
     dataFile2.print(", Gyro[mdps]: ");
     dataFile2.print(gyroscope[0]);
     dataFile2.print(", ");
     dataFile2.print(gyroscope[1]);
     dataFile2.print(", ");
-    dataFile2.println(gyroscope[2]);
+    dataFile2.print(gyroscope[2]);
+
+    dataFile2.print(", Mag[uT]: ");
+    dataFile2.print(magX, 3);
+    dataFile2.print(", ");
+    dataFile2.print(magY, 3);
+    dataFile2.print(", ");
+    dataFile2.println(magZ, 3);
 
     dataFile2.println();
     dataFile2.close();
-    Serial.println(F("ISM330DHCX data written to SD card."));
+    Serial.println(F("ISM330DHCX + MMC5983MA data written to SD card."));
     Serial.println();
   } else {
     Serial.println(F("Error opening position.txt for writing."));
     Serial.println();
   }
+
   manualTime = manualTime + 2;
 
   delay(1800); // Delay before the next reading
