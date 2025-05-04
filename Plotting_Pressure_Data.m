@@ -22,7 +22,7 @@ time = data(:, 1);
 pressure = data(:, 2);  % Pressure in Pascals
 
 % Convert pressure to altitude in meters using barometric formula
-P0 = 103325;  % Sea level standard atmospheric pressure (Pa)
+P0 = 101325;  % Sea level standard atmospheric pressure (Pa)
 altitude_m = 44330 * (1 - (pressure / P0).^(1/5.255));
 
 % Convert altitude to feet
