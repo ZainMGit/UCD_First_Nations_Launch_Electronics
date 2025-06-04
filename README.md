@@ -1,3 +1,4 @@
+
 Components needed for payload system
 - Arduino Uno R4
 - Micro SD card reader & microSD card
@@ -17,7 +18,12 @@ The BMP 280 sensor is recording temperature (°C) and pressure (Pa). Based on th
 
 
 
+Used for the University of California of Davis payload in the 2025 First Nations Launch Rocketry Competition 
 
+Awards won at comeptition:
+1st Overall 
+1st in Written Report 
+1st in Oral Presentation
 
 
 
