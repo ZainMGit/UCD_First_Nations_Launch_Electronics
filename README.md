@@ -8,7 +8,6 @@ This repository documents the payload system used by the University of Californi
 - 1st Place Overall  
 - 1st Place in Written Report  
 - 1st Place in Oral Presentation
-![image](https://github.com/user-attachments/assets/511e701e-2962-491f-b917-1b58506b4086)
 
 ---
 
@@ -33,7 +32,7 @@ This repository documents the payload system used by the University of Californi
 
 ---
 
-## 📊 Data Logging
+## Data Logging
 
 Sensor data is logged every **2 seconds** into separate `.txt` files on the SD card:
 
@@ -48,16 +47,23 @@ Sensor data is logged every **2 seconds** into separate `.txt` files on the SD c
 
 ---
 
-## 📁 Output Files
-
-- `pressure_data.txt` – Logs temperature, pressure, and altitude  
-- `motion_data.txt` – Logs acceleration and angular velocity
-
-Each log entry is timestamped for post-flight analysis and synchronization.
 
 ---
 
-## 📬 Contact
+## 📈 MATLAB Data Plotting Scripts
 
-For any inquiries, please reach out to the UC Davis First Nations Launch team.
+This repository includes two MATLAB scripts that visualize the collected sensor data:
+
+- **`Plotting_Pressure_Data.m`**  
+  - Reads `graphBMP.txt`  
+  - Plots pressure, temperature, and altitude over time  
+
+- **`Plotting_9DoF_Data.m`**  
+  - Reads `position.txt`  
+  - Plots acceleration and angular velocity across all three axes  
+  
+
+> 📌 Place the `.txt` files in the same directory as the MATLAB scripts before running them.
+
+
 
