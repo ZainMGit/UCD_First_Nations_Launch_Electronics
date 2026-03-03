@@ -4,14 +4,14 @@
 
 This repository documents the payload system used by the University of California, Davis in the **2025 First Nations Launch Rocketry Competition** for the Moon challenge. The payload collects in-flight motion, rotation and pressure data using sensors sensors, and logs this data to an SD card throughout the rocket’s flight.
 
-### 🥇 Awards Received In Competition
+### Awards Received In Competition
 - 1st Place Overall  
 - 1st Place in Written Report  
 - 1st Place in Oral Presentation
 
 ---
 
-## 🔧 Components
+## Components
 
 - **Arduino Uno R4**
 - **MicroSD Card Reader and MicroSD Card** 
@@ -50,7 +50,7 @@ Sensor data is logged every **2 seconds** into separate `.txt` files on the SD c
 
 ---
 
-## 📈 MATLAB Data Plotting Scripts
+## MATLAB Data Plotting Scripts
 
 This repository includes two MATLAB scripts that visualize the collected sensor data:
 
@@ -63,7 +63,7 @@ This repository includes two MATLAB scripts that visualize the collected sensor 
   - Plots acceleration and angular velocity across all three axes  
   
 
-> 📌 Place the `.txt` files in the same directory as the MATLAB scripts before running them.
+> Place the `.txt` files in the same directory as the MATLAB scripts before running them.
 
 
 
